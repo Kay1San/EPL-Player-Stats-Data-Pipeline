@@ -1,0 +1,6 @@
+keys/
+/Terraform/variables.tf
+/Terraform/.terraform.lock.hcl
+/Terraform/terraform.tfstate
+/Terraform/terraform.tfstate.backup
+/Terraform/.terraform/
