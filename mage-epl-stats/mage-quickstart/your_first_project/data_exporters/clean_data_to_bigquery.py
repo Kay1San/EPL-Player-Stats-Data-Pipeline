@@ -16,7 +16,7 @@ def export_data_to_big_query(df: DataFrame, **kwargs) -> None:
 
     Docs: https://docs.mage.ai/design/data-loading#bigquery
     """
-    table_id = 'epl-player-stats.bq_epl_player_stats.bq_epl_player_stats'
+    table_id = 'epl-player-stats.bq_epl_player_stats.table-bq-epl-player-stats'
     config_path = path.join(get_repo_path(), 'io_config.yaml')
     config_profile = 'default'
 
