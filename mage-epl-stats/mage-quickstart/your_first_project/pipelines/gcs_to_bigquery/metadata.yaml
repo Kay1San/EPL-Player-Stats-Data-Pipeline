@@ -1,47 +1,39 @@
 blocks:
 - all_upstream_blocks_executed: true
   color: null
-  configuration:
-    data_provider: bigquery
-    data_provider_profile: default
-    dbt: {}
-    disable_query_preprocessing: false
-    export_write_policy: append
-    limit: 1000
-    use_raw_sql: true
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: sql
-  name: test_config
-  retry_config: null
-  status: executed
-  timeout: null
-  type: data_loader
-  upstream_blocks: []
-  uuid: test_config
-- all_upstream_blocks_executed: true
-  color: null
-  configuration:
-    data_provider: bigquery
-    data_provider_profile: default
-    export_write_policy: append
+  configuration: {}
   downstream_blocks:
-  - football_data_to_gcs
-  - partitionned_data_to_gcs
+  - clean_player_data
   executor_config: null
   executor_type: local_python
   has_callback: false
   language: python
-  name: load_football_data
+  name: load_gcp_player_data
   retry_config: null
   status: executed
   timeout: null
   type: data_loader
   upstream_blocks: []
-  uuid: load_football_data
+  uuid: load_gcp_player_data
 - all_upstream_blocks_executed: true
+  color: null
+  configuration: {}
+  downstream_blocks:
+  - clean_data_to_gcs
+  - clean_data_to_bigquery
+  executor_config: null
+  executor_type: local_python
+  has_callback: false
+  language: python
+  name: clean_player_data
+  retry_config: null
+  status: updated
+  timeout: null
+  type: transformer
+  upstream_blocks:
+  - load_gcp_player_data
+  uuid: clean_player_data
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks: []
@@ -49,15 +41,15 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: python
-  name: football_data_to_gcs
+  name: clean_data_to_gcs
   retry_config: null
   status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
-  - load_football_data
-  uuid: football_data_to_gcs
-- all_upstream_blocks_executed: true
+  - clean_player_data
+  uuid: clean_data_to_gcs
+- all_upstream_blocks_executed: false
   color: null
   configuration: {}
   downstream_blocks: []
@@ -65,41 +57,26 @@ blocks:
   executor_type: local_python
   has_callback: false
   language: python
-  name: partitionned_data_to_gcs
+  name: clean_data_to_BigQuery
   retry_config: null
   status: executed
   timeout: null
   type: data_exporter
   upstream_blocks:
-  - load_football_data
-  uuid: partitionned_data_to_gcs
-- all_upstream_blocks_executed: true
-  color: null
-  configuration: {}
-  downstream_blocks: []
-  executor_config: null
-  executor_type: local_python
-  has_callback: false
-  language: python
-  name: test_spark
-  retry_config: null
-  status: executed
-  timeout: null
-  type: data_loader
-  upstream_blocks: []
-  uuid: test_spark
+  - clean_player_data
+  uuid: clean_data_to_bigquery
 cache_block_output_in_memory: false
 callbacks: []
 concurrency_config: {}
 conditionals: []
-created_at: '2024-08-03 19:03:33.762353+00:00'
+created_at: '2024-08-04 15:51:24.731230+00:00'
 data_integration: null
 description: null
 executor_config: {}
 executor_count: 1
 executor_type: null
 extensions: {}
-name: data_to_gcs
+name: gcs_to_bigquery
 notification_config: {}
 remote_variables_dir: null
 retry_config: {}
@@ -109,6 +86,6 @@ settings:
 spark_config: {}
 tags: []
 type: python
-uuid: data_to_gcs
+uuid: gcs_to_bigquery
 variables_dir: /root/.mage_data/your_first_project
 widgets: []
