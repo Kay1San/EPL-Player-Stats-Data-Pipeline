@@ -1,0 +1,8 @@
+sources:
+    - name: staging
+      database: epl-player-stats
+      schema: bq_epl_player_stats
+
+      loaded_at_field: record_loaded_at
+      tables:
+        - name: table-bq-epl-player-stats
