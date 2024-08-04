@@ -23,12 +23,36 @@ def transform(data, *args, **kwargs):
         Anything (e.g. data frame, dictionary, array, int, str, etc.)
     """
     
-    url_teams = "https://raw.githubusercontent.com/vaastav/Fantasy-Premier-League/master/data/master_team_list.csv"
-    teams_df = pd.read_csv(url_teams)
+    url_old_teams = "https://raw.githubusercontent.com/vaastav/Fantasy-Premier-League/master/data/master_team_list.csv"
+    old_teams_df = pd.read_csv(url_old_teams)
 
 
     data = data[data['minutes'] > 0]
-    data = pd.merge(data, teams_df, on=['season', 'team'], how='left')
+    data = pd.merge(data, old_teams_df, on=['season', 'team'], how='left')
+
+
+    url_current_teams = "https://raw.githubusercontent.com/vaastav/Fantasy-Premier-League/master/data/2023-24/teams.csv"
+    current_teams_df = pd.read_csv(url_current_teams)
+    current_teams_df = current_teams_df.rename(columns={"id": "team", "name": "new_team_name"})
+    #print(current_teams_df['team'].unique())
+
+    
+    current_data = data[data['season'] == "2023-24"]
+    #print(current_teams_df['team'].unique())
+    
+    current_data = pd.merge(current_data, current_teams_df[['team', 'new_team_name']], how='left', on='team')
+    current_data = current_data.drop(columns=['team_name'])
+    current_data = current_data.rename(columns={"new_team_name" : "team_name"})
+    
+    #print(current_data.head())
+
+
+    data = pd.concat([
+    data[data['season'] != "2023-24"],  
+    current_data  
+    ])
+   
+    
 
     data = data.drop(columns=['code', 'cost_change_event', 'bps', 'chance_of_playing_next_round', 'chance_of_playing_this_round', 
                              'cost_change_event_fall', 'cost_change_start', 'cost_change_start_fall', 'bonus', 'dreamteam_count', 'team',
@@ -47,6 +71,8 @@ def transform(data, *args, **kwargs):
     data = data.drop(columns = ['first_name', 'second_name'])
 
     roles = {1: 'GK', 2: 'DEF', 3: 'MID', 4: 'FWD'}
+
+   
     
     def get_role(role):
         return roles.get(role, role)
@@ -60,8 +86,7 @@ def transform(data, *args, **kwargs):
                 'creativity', 'influence', 'minutes', 'now_cost', 'own_goals', 'penalties_missed', 'penalties_saved', 'points_per_game',
                 'saves', 'red_cards', 'yellow_cards', 'total_points', 'value_season', 'ict_index_rank_type']]
 
-    
-    
+    print(data.tail())
     
     return data
 
@@ -71,5 +96,5 @@ def test_output(output, *args) -> None:
     """
     Template code for testing the output of the block.
     """
-    if (output['minutes'] == 0).all():
-        raise ValueError("the column don't have the value")
+    if (output['team_name'] == "").all():
+        raise ValueError("empty team name")
