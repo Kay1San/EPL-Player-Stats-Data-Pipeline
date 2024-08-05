@@ -1,12 +1,13 @@
 select 
-    team_name,
-    SUM(goals_scored) as t_goals, 
-    SUM(assists) as t_assists, 
-    SUM(goals_and_assists) as t_g_a, 
-    SUM(goals_conceded) as t_goals_conceded, 
-    SUM(transfers_in) as sum_bought, 
-    SUM(transfers_out) as sum_sold
+    team_name as Team,
+    season as Season,
+    SUM(goals_scored) as Goals, 
+    SUM(assists) as Assists, 
+    SUM(goals_and_assists) AS GoalsAndAssists, 
+    SUM(goals_conceded) AS GoalsConceded, 
+    SUM(transfers_in) AS TotalTransferSpend, 
+    SUM(transfers_out) AS TotalTransferIncome
 from 
     {{ ref('stg_table_bq_epl_player_stats') }}
 group by 
-    team_name
+    Team, Season
