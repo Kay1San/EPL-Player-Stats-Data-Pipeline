@@ -6,3 +6,116 @@ sources:
       loaded_at_field: record_loaded_at
       tables:
         - name: table-bq-epl-player-stats
+          description: >
+            English Fantasy Premier League Players stats.
+            tests :
+                - unique : 
+                    severity : warn
+                - not_null:
+                    severity : warn
+
+models:
+  - name: all_seasons_teams
+    description: "Statistics of Premier League Clubs from 2016-17 to 2023-24"
+    columns:
+      - name: team
+        data_type: string
+        description: "Team Name"
+
+      - name: season
+        data_type: string
+        description: "Season year"
+
+      - name: goals
+        data_type: int64
+        description: "Total goals scored in a single season"
+
+      - name: assists
+        data_type: int64
+        description: "Total assists in a single season"
+
+      - name: goalsandassists
+        data_type: int64
+        description: "Total G/A in a single season"
+
+      - name: goalsconceded
+        data_type: int64
+        description: "Total goal conceded in a single season"
+
+      - name: totaltransferspend
+        data_type: int64
+        description: "Total amount of adding a player to the team"
+
+      - name: totaltransferincome
+        data_type: int64
+        description: "Total amount of removing a player to the team"
+
+  - name: player_stats
+    description: "Statistics of PL players within a season"
+    columns:
+      - name: name
+        data_type: string
+        description: "Full name of the player"
+
+      - name: team
+        data_type: string
+        description: "Team name of which the player played"
+
+      - name: season
+        data_type: string
+        description: "Season that the player played"
+
+      - name: role
+        data_type: string
+        description: "Player's role in the field (GK, DEF, MID, FWD)"
+
+      - name: goals
+        data_type: int64
+        description: "Amount of goals scored by a player in a season"
+
+      - name: assists
+        data_type: int64
+        description: "Amount of assists of a plyer in a season"
+
+      - name: goalsandassists
+        data_type: int64
+        description: "Amount of G/A of a player in a season"
+
+      - name: goalsconceded
+        data_type: int64
+        description: "Number of goals conceded by a player in a season"
+
+      - name: cleansheets
+        data_type: int64
+        description: "Number of games a player went in a season without the opposing team scoring"
+
+      - name: influence
+        data_type: float64
+        description: "Number describing how much the player has influenced the team"
+
+      - name: creativity
+        data_type: float64
+        description: "Number describing how the player is creative in a match"
+
+      - name: totaltransferspend
+        data_type: int64
+        description: "Number of times a player was added to a team"
+
+      - name: yellowcards
+        data_type: int64
+        description: "Number of yellow cards the player received in a season"
+
+      - name: redcards
+        data_type: int64
+        description: "Number of red cards the played received in a season"
+
+      - name: valueseason
+        data_type: float64
+        description: "Value of the player in a season"
+
+      - name: cost
+        data_type: int64
+        description: "Cost of the player in Fantasy League"
+                      
+                
+

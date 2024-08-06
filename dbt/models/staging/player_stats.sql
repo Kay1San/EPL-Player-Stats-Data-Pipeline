@@ -13,7 +13,8 @@ select
     transfers_in as TotalTransferSpend, 
     yellow_cards as YellowCards,
     red_cards as RedCards,
-    value_season as ValueSeason
+    value_season as ValueSeason,
+    now_cost as Cost
     
 from 
     {{ ref('stg_table_bq_epl_player_stats') }}
