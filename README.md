@@ -14,6 +14,7 @@ This project uses raw player data from the Fantasy Premier League provided by va
 
 
 ## Architecture
+![Pipeline Architecture](Images/epl-pipeline.png)
 
 
 ## Dashboard
