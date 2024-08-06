@@ -21,7 +21,7 @@ This project uses raw player data from the Fantasy Premier League provided by va
 You can access the [Dashboard here](https://lookerstudio.google.com/embed/reporting/5f51adbe-f19a-48c7-afe5-d815b6dbcf7f/page/nJ47D), which lets users filter data by season year, player name, and role.
 ![Dashboard](Images/PL-Dashboard.png)
 
-## Reproductibily
+## Reproducibility
 
 ### Google Cloud Platform (GCP)
 * Ensure the following APIs are installed
