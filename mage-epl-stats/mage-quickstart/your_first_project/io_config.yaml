@@ -37,7 +37,7 @@ default:
   DUCKDB_DATABASE: database
   DUCKDB_SCHEMA: main
   # Google
-  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "/home/src/keys/epl-player-stats-597ac10755cc.json"
+  GOOGLE_SERVICE_ACC_KEY_FILEPATH: "SERVICE_ACCOUNT_KEY_HERE"
   GOOGLE_LOCATION: us-east1 # Optional
   # MongoDB
   # Specify either the connection string or the (host, password, user, port) to connect to MongoDB.
