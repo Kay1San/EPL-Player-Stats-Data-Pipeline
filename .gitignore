@@ -4,3 +4,4 @@ keys/
 /Terraform/terraform.tfstate
 /Terraform/terraform.tfstate.backup
 /Terraform/.terraform/
+/mage-epl-stats/mage-quickstart/your_first_project/io_config.yaml
