@@ -39,7 +39,7 @@ terraform init
 terraform plan
 terraform apply
 ```
-* You can destroy those infrastucture using `terraform destroy`
+* You can destroy these infrastuctures using `terraform destroy`
 
 ### Mage AI
 * Mage AI can be installed through docker
